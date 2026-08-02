@@ -187,8 +187,9 @@ class SabrDownloadEngine {
                             consecutiveErrors < MAX_CONSECUTIVE_ERRORS
                         ) {
                             delay(50)
-                            if (isCancelled || endOfTrackReached.get()) break
-                                                            val audioEnd = sessionState.audioBufferedRanges
+                                                        if (isCancelled || endOfTrackReached.get()) break
+                            try {
+                                val audioEnd = sessionState.audioBufferedRanges
                                     .maxOfOrNull { it.startTimeMs + it.durationMs } ?: 0L
                                 val videoEnd = if (audioOnly) audioEnd else {
                                     sessionState.videoBufferedRanges
