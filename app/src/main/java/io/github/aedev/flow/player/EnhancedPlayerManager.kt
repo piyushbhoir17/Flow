@@ -2633,11 +2633,15 @@ class EnhancedPlayerManager private constructor() {
         }
     }
 
+      private var sabrSeekJob: kotlinx.coroutines.Job? = null
+
     private fun sabrSeekTo(positionMs: Long) {
         val shouldPlay = player?.playWhenReady ?: true
         Log.d(TAG, "SABR seek: rebuilding session at ${positionMs}ms")
         _playerState.value = _playerState.value.copy(isBuffering = true)
-        scope.launch {
+        
+        sabrSeekJob?.cancel()
+        sabrSeekJob = scope.launch {
             mediaLoader?.releaseSabr()
             player?.stop()
             player?.clearMediaItems()
