@@ -2633,7 +2633,7 @@ class EnhancedPlayerManager private constructor() {
         }
     }
 
-          private var sabrSeekJob: Job? = null
+          var sabrSeekJob: Job? = null
 
     private fun sabrSeekTo(positionMs: Long) {
         val shouldPlay = player?.playWhenReady ?: true
