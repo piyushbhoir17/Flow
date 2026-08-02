@@ -2633,7 +2633,7 @@ class EnhancedPlayerManager private constructor() {
         }
     }
 
-          var sabrSeekJob: Job? = null
+              private var sabrSeekJob: Job? = null
 
     private fun sabrSeekTo(positionMs: Long) {
         val shouldPlay = player?.playWhenReady ?: true
@@ -2641,15 +2641,16 @@ class EnhancedPlayerManager private constructor() {
         _playerState.value = _playerState.value.copy(isBuffering = true)
 
         sabrSeekJob?.cancel()
-        sabrSeekJob = scope.launch {
-            mediaLoader?.releaseSabr()
-            player?.stop()
-            player?.clearMediaItems()
-            val loaded = loadMediaInternal(currentVideoStream, currentAudioStream, positionMs)
-            if (loaded) {
-                player?.playWhenReady = shouldPlay
+        sabrSeekJob =
+            scope.launch {
+                mediaLoader?.releaseSabr()
+                player?.stop()
+                player?.clearMediaItems()
+                val loaded = loadMediaInternal(currentVideoStream, currentAudioStream, positionMs)
+                if (loaded) {
+                    player?.playWhenReady = shouldPlay
+                }
             }
-        }
     }
 
     fun seekToLiveTimeline(position: Long) {
