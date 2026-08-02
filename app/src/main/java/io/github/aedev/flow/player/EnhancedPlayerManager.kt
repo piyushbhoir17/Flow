@@ -2631,10 +2631,10 @@ class EnhancedPlayerManager private constructor() {
         } else {
             p.setSeekParameters(SeekParameters.CLOSEST_SYNC)
         }
-    }
+        }
 
     private var sabrSeekJob: Job? = null
-    
+
     private fun sabrSeekTo(positionMs: Long) {
         val shouldPlay = player?.playWhenReady ?: true
         Log.d(TAG, "SABR seek: rebuilding session at ${positionMs}ms")
