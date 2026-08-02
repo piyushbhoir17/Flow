@@ -2633,8 +2633,8 @@ class EnhancedPlayerManager private constructor() {
         }
     }
 
-              private var sabrSeekJob: Job? = null
-
+    private var sabrSeekJob: Job? = null
+    
     private fun sabrSeekTo(positionMs: Long) {
         val shouldPlay = player?.playWhenReady ?: true
         Log.d(TAG, "SABR seek: rebuilding session at ${positionMs}ms")
