@@ -188,9 +188,12 @@ class SabrDownloadEngine {
                         ) {
                             delay(50)
                             if (isCancelled || endOfTrackReached.get()) break
-                            try {
-                                val audioEnd = sessionState.audioBufferedRanges.maxOfOrNull { it.startTimeMs + it.durationMs } ?: 0L
-                                val videoEnd = if (audioOnly) audioEnd else sessionState.videoBufferedRanges.maxOfOrNull { it.startTimeMs + it.durationMs } ?: 0L
+                                                            val audioEnd = sessionState.audioBufferedRanges
+                                    .maxOfOrNull { it.startTimeMs + it.durationMs } ?: 0L
+                                val videoEnd = if (audioOnly) audioEnd else {
+                                    sessionState.videoBufferedRanges
+                                        .maxOfOrNull { it.startTimeMs + it.durationMs } ?: 0L
+                                }
                                 sessionState.playheadPositionMs = minOf(audioEnd, videoEnd)
                                 controller.requestNextSegments()
                             } catch (e: CancellationException) {
