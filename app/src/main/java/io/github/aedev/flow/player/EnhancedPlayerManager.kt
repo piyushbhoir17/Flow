@@ -2631,7 +2631,7 @@ class EnhancedPlayerManager private constructor() {
         } else {
             p.setSeekParameters(SeekParameters.CLOSEST_SYNC)
         }
-        }
+            }
 
     private var sabrSeekJob: Job? = null
 
